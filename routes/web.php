@@ -33,6 +33,7 @@ Route::get('/', [
 //     return view('blog/index');
 // });
 
-Route::get('/blog/show', function () {
-    return view('blog/show');
-});
+Route::get('/blog/{post}', [
+    'uses' => 'App\Http\Controllers\BlogController@show',
+    'as' => 'blog.show'
+]);

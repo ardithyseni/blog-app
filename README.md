@@ -9,7 +9,8 @@ Blog App CMS is created and developed by Verona Reshani & Ardit Hyseni
 ###### Running the project
 ```
 cd blog-app
-
+composer install
+npm install
 php artisan serve
 ```
 

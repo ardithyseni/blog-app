@@ -5,10 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Post extends Model
 {
     use HasFactory;
+
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function getImageUrlAttribute($value)
     {
@@ -21,6 +27,17 @@ class Post extends Model
         }
 
         return $imageUrl;
+    }
+
+    public function getDateAttribute($value)
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function scopeLatestFirst($query)
+    {
+        $query = $this->orderBy('created_at', 'desc');
+        return $query;
     }
 
 }

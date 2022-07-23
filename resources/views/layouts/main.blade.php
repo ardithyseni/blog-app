@@ -6,8 +6,8 @@
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
     <header>
@@ -37,7 +37,7 @@
     </header>
 
     @yield('content')
-
+    
     <footer>
         <div class="container">
             <div class="row">
@@ -56,11 +56,8 @@
                 </div>
             </div>
         </div>
-        <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-            Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-        </div>
     </footer>
 
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

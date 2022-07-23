@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', [
-//     'uses' => 'BlogController@index',    
-// ]);
+Route::get('/', [
+    'uses' => 'App\Http\Controllers\BlogController@index',
+    'as' => 'blog'    
+]);
 
-Route::get('/', 'App\Http\Controllers\BlogController@index');
+// Route::get('/', 'App\Http\Controllers\BlogController@index');
+
 
 // Route::get(
 //     '/',

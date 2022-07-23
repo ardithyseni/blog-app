@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        if(!Schema::hasTable('posts')){
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('author_id');
@@ -23,9 +24,9 @@ return new class extends Migration
             $table->text('body');
             $table->string('image')->nullable();
             $table->timestamps();
-        });
+            });
+        }
     }
-
     /**
      * Reverse the migrations.
      *

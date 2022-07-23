@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use Carbon\Carbon;
 
 class Post extends Model
 {
+    protected $dates = ['published_at'];
+
     use HasFactory;
 
     public function author()
@@ -31,13 +34,17 @@ class Post extends Model
 
     public function getDateAttribute($value)
     {
-        return $this->created_at->diffForHumans();
+        return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();
     }
 
     public function scopeLatestFirst($query)
     {
-        $query = $this->orderBy('created_at', 'desc');
-        return $query;
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where("published_at", "<=", Carbon::now());
     }
 
 }

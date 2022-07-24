@@ -16,7 +16,7 @@ use App\Http\Controllers\BlogController;
 
 Route::get('/', [
     'uses' => 'App\Http\Controllers\BlogController@index',
-    'as' => 'blog'    
+    'as'   => 'blog'    
 ]);
 
 // Route::get('/', 'App\Http\Controllers\BlogController@index');
@@ -35,5 +35,10 @@ Route::get('/', [
 
 Route::get('/blog/{post}', [
     'uses' => 'App\Http\Controllers\BlogController@show',
-    'as' => 'blog.show'
+    'as'   => 'blog.show'
+]);
+
+Route::get('/category/{category}', [
+    'uses' => 'App\Http\Controllers\BlogController@category',
+    'as'   => 'category'
 ]);

@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Support\Facades\App;
 use Carbon\Carbon;
+
 
 class Post extends Model
 {
@@ -45,6 +46,16 @@ class Post extends Model
     public function scopePublished($query)
     {
         return $query->where("published_at", "<=", Carbon::now());
+    }
+
+    public function getBodyHtmlAttribute($value)
+    {
+        return $this->body ? Markdown::convertToHtml(e($this->body)) : NULL;
+    }
+    
+    public function getExcerptHtmlAttribute($value)
+    {
+        return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;
     }
 
 }

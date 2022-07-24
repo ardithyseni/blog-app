@@ -155,7 +155,7 @@ return [
     */
 
     'providers' => [
-
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
@@ -209,6 +209,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

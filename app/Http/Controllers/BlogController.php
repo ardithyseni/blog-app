@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
@@ -41,6 +42,23 @@ class BlogController extends Controller
         return view('blog/index', compact('posts', 'categoryName'));
         // die('blog index');
     }
+
+    public function author(User $author)
+    {
+        // die('posts by author');
+
+        $authorName = $author->name;
+        
+        $posts = $author->posts()
+                          ->with('category')
+                          ->latestFirst()
+                          ->published()
+                          ->simplePaginate($this->limit);
+
+        return view('blog/index', compact('posts', 'authorName'));
+        // die('blog index');
+    }
+
 
     public function show(Post $post)
     {

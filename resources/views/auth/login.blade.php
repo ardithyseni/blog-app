@@ -35,7 +35,7 @@
           <div class="col-xs-8">
             <div class="checkbox icheck">
               <label>
-                <input type="checkbox" name="remember"> Remember Me
+                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
               </label>
             </div>
           </div>

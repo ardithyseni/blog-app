@@ -47,3 +47,7 @@ Route::get('/author/{author}', [
     'uses' => 'App\Http\Controllers\BlogController@author',
     'as'   => 'author'
 ]);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -41,7 +41,17 @@ class BackendBlogController extends BackendController
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title'       => 'required',
+            'slug'        => 'required|unique:posts',
+            'body'        => 'required',
+            'published_at' => 'date_format:Y-m-d H:i:s',
+            'category_id' => 'required'
+        ]);
+
+        $request->user()->posts()->create($request->all());
+
+        return redirect(('/backend/blog'))->with('message', 'Your post was created successfully!');
     }
 
     /**

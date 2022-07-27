@@ -11,7 +11,8 @@ use Carbon\Carbon;
 
 class Post extends Model
 {
-    protected $dates = ['published_at'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'category_id'];
+    protected $dates    = ['published_at'];
 
     use HasFactory;
 
@@ -23,6 +24,11 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function setPublishedAtAttribute($value)
+    {
+        $this->attributes['published_at'] = $value ?: NULL;
     }
 
     public function getImageUrlAttribute($value)

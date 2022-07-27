@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -49,6 +50,8 @@ Route::get('/author/{author}', [
     'as'   => 'author'
 ]);
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\Backend\HomeController::class, 'index'])->name('home');
+
+Route::resource('/backend/blog', 'App\Http\Controllers\Backend\BackendBlogController');

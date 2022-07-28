@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Models\Post;
 
 class BackendBlogController extends BackendController
@@ -39,18 +40,10 @@ class BackendBlogController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\PostRequest $request)
     {
-        $this->validate($request, [
-            'title'       => 'required',
-            'slug'        => 'required|unique:posts',
-            'body'        => 'required',
-            'published_at' => 'date_format:Y-m-d H:i:s',
-            'category_id' => 'required'
-        ]);
-
         $request->user()->posts()->create($request->all());
-
+        
         return redirect(('/backend/blog'))->with('message', 'Your post was created successfully!');
     }
 

@@ -28,7 +28,7 @@
                 <div class="box-body ">
                     {!! Form::model($post, [
                         'method' => 'POST',
-                        'route'  => 'blog.store',
+                        'route'  => 'backend.blog.store',
                         'files'  => TRUE
                     ]) !!}
 

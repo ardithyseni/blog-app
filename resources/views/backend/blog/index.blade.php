@@ -13,8 +13,7 @@
         <li>
             <a href="{{url('/home') }}"><i class="fa fa-dashboard"></i>Dashboard</a>
         </li>
-        {{-- <li> <a href="{{ route('backend.blog.index') }}"></a>Blog</li> --}}
-        <li> <a href="#"></a>Blog</li>
+        <li> <a href="{{ route('backend.blog.index') }}"></a>Blog</li>
         <li class="active">All posts</li>
       </ol>
     </section>
@@ -26,7 +25,7 @@
             <div class="box">
                 <div class="box-header">
                     <div class="pull-left">
-                        <a href="{{ route('blog.create') }}" class="btn btn-success">Add new Post</a>
+                        <a href="{{ route('backend.blog.create') }}" class="btn btn-success">Add new Post</a>
                         {{-- <a href="#" class="btn btn-success">New Post</a> --}}
                     </div>
                 </div>
@@ -58,12 +57,12 @@
                             @foreach ($posts as $post)
                                 <tr>
                                     <td>
-                                        {{-- <a href="{{ route('backend.blog.edit', $post->id) }}" class="btn btn-xs btn-default"> --}}
-                                        <a href="#" class="btn btn-xs btn-default">
+                                        <a href="{{ route('backend.blog.edit', $post->id) }}" class="btn btn-xs btn-default">
+                                        {{-- <a href="#" class="btn btn-xs btn-default"> --}}
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        {{-- <a href="{{ route('backend.blog.destroy', $post->id) }}" class="btn btn-xs btn-danger"> --}}
-                                        <a href="#" class="btn btn-xs btn-danger">
+                                        <a href="{{ route('backend.blog.destroy', $post->id) }}" class="btn btn-xs btn-danger">
+                                        {{-- <a href="#" class="btn btn-xs btn-danger"> --}}
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </td>
@@ -85,11 +84,12 @@
               <div class="box-footer clearfix">
                 <div class="pull-left">
                     {{-- {{$posts->links()}} --}}
-                    {{ $posts->links( "pagination::bootstrap-4") }}
+                    {{ $posts->links("pagination::bootstrap-4") }}
                 </div>
                 <div class="pull-right">
                     <?php $postCount = $posts->count() ?>
-                    <small>Showing {{ $posts->count() }} out of {{ $post->count() }} items</small>
+                    {{-- <small>Showing {{ $posts->count() }} out of {{ $post->count() }} items</small> --}}
+                    <small>Showing {{ $posts->firstItem() }} – {{ $posts->lastItem() }} out of {{$posts->total()}} posts</small>
                 </div>
               </div>
             </div>

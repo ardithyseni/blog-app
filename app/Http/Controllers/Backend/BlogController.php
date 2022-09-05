@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-// use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Models\Post;
+use App\Http\Requests\PostRequest;
 
-class BackendBlogController extends BackendController
+class BlogController extends BackendController
 {
-    protected $limit = 8;
+
+    protected $limit = 10;
     protected $uploadPath;
 
     public function __construct()
@@ -17,6 +17,7 @@ class BackendBlogController extends BackendController
         parent::__construct();
         $this->uploadPath = public_path('img');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,30 +48,31 @@ class BackendBlogController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\PostRequest $request)
+    public function store(PostRequest $request)
     {
         $data = $this->handleRequest($request);
 
         $request->user()->posts()->create($data);
-        
+
         return redirect(('/backend/blog'))->with('message', 'Your post was created successfully!');
     }
 
-    public function handleRequest($request)
+    private function handleRequest($request)
     {
         $data = $request->all();
 
-        if ($request->hasFile('image')) 
+        if ($request->hasFile('image'))
         {
-            $image       = $request->file('image');
-            $fileName    = $image->getClientOriginalName();
+            $image = $request->file('image');
+            $fileName = $image->getClientOriginalName();
             $destination = $this->uploadPath;
 
             $image->move($destination, $fileName);
-            
+
             $data['image'] = $fileName;
+
+            return $data;
         }
-        return $data;
     }
 
     /**

@@ -16,7 +16,7 @@ class BlogController extends BackendController
     public function __construct()
     {
         parent::__construct();
-        $this->uploadPath = public_path('img');
+        $this->uploadPath = public_path(config('cms.image.directory'));
     }
 
     /**
@@ -74,11 +74,14 @@ class BlogController extends BackendController
 
             if ($successUploaded) 
             {
+                $width  = config('cms.image.thumbnail.width');
+                $height = config('cms.image.thumbnail.height');
+
                 $extension = $image->getClientOriginalExtension();
                 $thumbnail = str_replace(".{$extension}", "_thumb.{$extension}", $fileName);
 
                 Image::make($destination . '/' . $fileName)
-                    ->resize(320, 180)
+                    ->resize($width, $height)
                     ->save($destination . '/' . $thumbnail);
             }
 

@@ -71,7 +71,7 @@
                                     <td>{{ $post->category->title }}</td>
                                     <td>
                                         <abbr title="{{ $post->dateFormatted(true) }}">{{ $post->dateFormatted() }}</abbr>
-                                         | {!! $post->publicationLabel() !!}
+                                        | {!! $post->publicationLabel() !!}
                                     </td>
                                 </tr>
                             @endforeach

@@ -84,7 +84,7 @@ class Post extends Model
 
     public function publicationLabel()
     {
-        if (! $this->published_at) {
+        if (!$this->published_at) {
             return '<span class="label label-warning">Draft</span>';
         }
 

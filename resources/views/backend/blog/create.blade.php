@@ -23,7 +23,7 @@
       <!-- Main content -->
       <section class="content">
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-9">
               <div class="box">
                 <div class="box-body ">
                     {!! Form::model($post, [
@@ -48,7 +48,7 @@
                             <span class="help-block">{{ $errors->first('slug') }}</span>
                         @endif
                     </div>
-                    <div class="form-group">
+                    <div class="form-group excerpt">
                         {!! Form::label('excerpt') !!}
                         {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
                     </div>
@@ -60,35 +60,13 @@
                             <span class="help-block">{{ $errors->first('body') }}</span>
                         @endif
                     </div>
-                    <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-                        {!! Form::label('published_at', 'Publish Date') !!}
-                        {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
 
-                        @if($errors->has('published_at'))
-                            <span class="help-block">{{ $errors->first('published_at') }}</span>
-                        @endif
-                    </div>
-                    <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-                        {!! Form::label('category_id', 'Category') !!}
-                        {!! Form::select('category_id', App\Models\Category::pluck('title', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Choose category']) !!}
+                    {{-- date input --}}
 
-                        @if($errors->has('category_id'))
-                            <span class="help-block">{{ $errors->first('category_id') }}</span>
-                        @endif
-                    </div>
-                    
-                    <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                        {!! Form::label('image', 'Featured image') !!}
-                        {!! Form::file('image') !!}
-
-                        @if($errors->has('image'))
-                            <span class="help-block">{{ $errors->first('image') }}</span>
-                        @endif
-                    </div>
+                    {{-- image input --}}
 
                     <hr>
 
-                    {!! Form::submit('Create new post', ['class' => 'btn btn-primary']) !!}
 
                     {!! Form::close() !!}
                 </div>
@@ -96,6 +74,82 @@
               </div>
               <!-- /.box -->
             </div>
+
+            <div class="col-xs-3">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Publish</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
+                            {!! Form::label('published_at', 'Publish Date') !!}
+                            <div class='input-group date' id='datetimepicker1'>
+                                {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                             </div>
+    
+                            @if($errors->has('published_at'))
+                                <span class="help-block">{{ $errors->first('published_at') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="pull-left">
+                            <a href="#" class="btn btn-default">Save Draft</a>
+                        </div>
+                        <div class="pull-right">
+                            {!! Form::submit('Publish', ['class' => 'btn btn-primary']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Category</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
+                            {{-- {!! Form::label('category_id', 'Category') !!} --}}
+                            {!! Form::select('category_id', App\Models\Category::pluck('title', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Choose category']) !!}
+    
+                            @if($errors->has('category_id'))
+                                <span class="help-block">{{ $errors->first('category_id') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Featured Image</h3>
+                    </div>
+                    <div class="box-body text-center">
+                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                            {{-- {!! Form::label('image', 'Featured image') !!} --}}
+                            <br>
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
+                                  <img src="https://via.placeholder.com/200x150?text=No+Image" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                                  <span class="btn btn-outline-secondary btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{!! Form::file('image') !!}</span>
+                                  <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                </div>
+                              </div>
+                            {{-- {!! Form::file('image') !!} --}}
+    
+                            @if($errors->has('image'))
+                                <span class="help-block">{{ $errors->first('image') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
           </div>
         <!-- ./row -->
       </section>
@@ -107,5 +161,26 @@
 @section('script')
     <script type="text/javascript">
         $('ul.pagination').addClass('no-margin pagination-sm');
+    
+        $('#title').on('blur', function() {
+            var theTitle = this.value.toLowerCase().trim(),
+                slugInput = $('#slug'),
+                theSlug = theTitle.replace(/&/g, '-and-')
+                                  .replace(/[^a-z0-9-]+/g, '-')
+                                  .replace(/\-\-+/g, '-')
+                                  .replace(/^-+|-+$/g, '');
+                                
+
+            slugInput.val(theSlug);
+        });
+
+        var simplemde1 = new SimpleMDE({ element: $("#excerpt")[0] });
+        var simplemde = new SimpleMDE({ element: $("#body")[0] });
+
+        $('#datetimepicker1').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            showClear: true
+        });
+
     </script>
 @endsection

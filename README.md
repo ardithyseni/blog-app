@@ -4,7 +4,7 @@
 
 ## About the project
 
-Blog App CMS is created and developed by Verona Reshani & Ardit Hyseni
+Blog App CMS is created and developed by Ardit Hyseni
 
 ###### Running the project
 ```

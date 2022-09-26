@@ -56,8 +56,9 @@ class BlogController extends BackendController
 
         $request->user()->posts()->create($data);
 
-        return redirect(('/backend/blog'))->with('message', 'Your post was created successfully!');
+        return redirect('/backend/blog')->with('message', 'Your post was created successfully!');
     }
+
 
     private function handleRequest($request)
     {

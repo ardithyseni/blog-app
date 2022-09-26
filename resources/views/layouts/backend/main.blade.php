@@ -52,7 +52,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0
     </div>
-    <strong>2022 <a href="https://github.com/ardithyseni/blog-app">Ardit Hyseni & Verona Reshani</a>.</strong>
+    <strong>2022 <a href="https://github.com/ardithyseni/blog-app">Ardit Hyseni</a>.</strong>
   </footer>
 
 </div>

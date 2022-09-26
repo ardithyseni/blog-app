@@ -29,7 +29,7 @@ class PostRequest extends FormRequest
             'body'         => 'required',
             'published_at' => 'date_format:Y-m-d H:i:s',
             'category_id'  => 'required',
-            'image'        => 'mimes:png,jpg,png,jpeg,bmp'
+            'image'        => 'mimes:jpg,jpeg,bmp,png',
         ];
     }
 }
